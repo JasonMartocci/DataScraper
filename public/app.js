@@ -6,6 +6,7 @@ $.getJSON('/articles', function(data) {
 
 
 $(document).on('click', 'p', function(){
+  $('#noteTaker').empty();
   $('#notes').empty();
   var thisId = $(this).attr('data-id');
 
@@ -15,10 +16,15 @@ $(document).on('click', 'p', function(){
   })
     .done(function( data ) {
       console.log(data);
-      $('#notes').append('<h2>' + data.title + '</h2>');
-      $('#notes').append('<input id="titleinput" name="title" >');
-      $('#notes').append('<textarea id="bodyinput" name="body"></textarea>');
-      $('#notes').append('<button data-id="' + data._id + '" id="savenote">Save Note</button>');
+
+      $('#noteTaker').append('<h2>' + data.title + '</h2>');
+      $('#noteTaker').append('<input id="titleinput" name="title" >');
+      $('#noteTaker').append('<textarea id="bodyinput" name="body"></textarea>');
+      $('#noteTaker').append('<button data-id="' + data._id + '" id="savenote">Save Note</button>');
+
+      $('#notes').append('<h1>' + data.title + '</h1>');
+      $('#notes').append('<h2>' + data.note.title + '</h2>');
+      $('#notes').append('<h2>' + data.note.body + '</h2>');
 
       if(data.note){
         $('#titleinput').val(data.note.title);
