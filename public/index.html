@@ -16,32 +16,63 @@
   <style>
     body{
       /*background-color: #DECADE*/
-      background-color: #F2F6D0
+      background-color: #193048;
     }
-    #wrapper{
-      width:960px;
+    #container{
+      width: 80%;
       margin: 0 auto;
       padding-top: 5%;
     }
     #articles{
-      height:700px;
+      height: 500px;
+      width: 100%;
       display:inline-block;
       overflow: auto;
     }
     #notes{
     }
-    textarea, input{
+      textarea, input{
       display:block;
       width:100%;
       background-color: #FCF5C7;
     }
+    .header{
+      background-color: #000000;
+      color: #ffffff;
+    }
+    .details{
+      background-color: #CCCCCC;
+    }
+    .notesTitle{
+      display:block;
+      width:100%;
+      padding: 5px;
+      background-color: #FCF5C7;
+      border-left: 1px solid #000000;
+      border-top: 1px solid #000000;
+      border-right: 1px solid #000000;
+      border-bottom: 3px solid #000000;
+      color: #000000;
+    }
+    .note{
+      display:block;
+      width:100%;
+      padding: 5px;
+      background-color: #FCF5C7;
+      border-left: 1px solid #000000;
+      border-right: 1px solid #000000;
+      border-bottom: 1px solid #000000;
+      color: #000000;
+    }
     input{
       height:36px;
       font-size: 24px;
+      color: #000000;
     }
     textarea{
       height:200px;
       font-size: 18px;
+      color: #000000;
     }
   </style>
 
@@ -49,21 +80,15 @@
 
 </head>
 <body>
-<div class="container">
+<div id="container">
   <div class="row">
-    <div class="col-md-12"><h1>Note Scraper</h1></div>
+    <div class="col-md-12 header"><h1>Note Scraper</h1></div>
   </div>
-  <div class="row">
+  <div class="row details">
     <div class="col-md-4"><div id="noteTaker"></div></div>
     <div class="col-md-4"><div id="articles"></div></div>
     <div class="col-md-4"><div id="notes"></div></div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">Footer</div>
-  </div>
-    
-    
-    
+  </div>    
   <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
   <script src="app.js"></script>
 </div>

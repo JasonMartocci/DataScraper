@@ -12,8 +12,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static('public'));
 
-
-
 //Database configuration
 mongoose.connect('mongodb://localhost/mongoosescraper');
 var db = mongoose.connection;
@@ -32,36 +30,31 @@ var Article = require('./models/Article.js');
 
 // Routes
 app.get('/', function(req, res) {
-  res.send(index.html);
+  res.send(index.html)
 });
-
 
 app.get('/scrape', function(req, res) {
   request('http://www.echojs.com/', function(error, response, html) {
     var $ = cheerio.load(html);
     $('article h2').each(function(i, element) {
+		var result = {};
 
-				var result = {};
+		result.title = $(this).children('a').text();
+		result.link = $(this).children('a').attr('href');
 
-				result.title = $(this).children('a').text();
-				result.link = $(this).children('a').attr('href');
+		var entry = new Article (result);
 
-				var entry = new Article (result);
-
-				entry.save(function(err, doc) {
-				  if (err) {
-				    console.log(err);
-				  } else {
-				    console.log(doc);
-				  }
-				});
-
-
+		entry.save(function(err, doc) {
+		  if (err) {
+		    console.log(err);
+		  } else {
+		    console.log(doc);
+		  }
+		});
     });
   });
-  res.send("Scrape Complete");
+  res.send("Scrape Complete" + " <a href='/'>Click Here</a> to view your results.");
 });
-
 
 app.get('/articles', function(req, res){
 	Article.find({}, function(err, doc){
@@ -72,7 +65,6 @@ app.get('/articles', function(req, res){
 		}
 	});
 });
-
 
 app.get('/articles/:id', function(req, res){
 	Article.findOne({'_id': req.params.id})
@@ -85,7 +77,6 @@ app.get('/articles/:id', function(req, res){
 		}
 	});
 });
-
 
 app.post('/articles/:id', function(req, res){
 	var newNote = new Note(req.body);
@@ -107,13 +98,6 @@ app.post('/articles/:id', function(req, res){
 	});
 });
 
-
-
-
-
-
-
-
-app.listen(3006, function() {
-  console.log('App running on port 3006!');
+app.listen(3000, function() {
+  console.log('App running on port 3000!');
 });
